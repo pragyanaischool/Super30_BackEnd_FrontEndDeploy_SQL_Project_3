@@ -47,3 +47,4 @@ if res.status_code == 200:
 
 else:
     st.error("Failed to fetch data")
+    st.write(res.status_code)
