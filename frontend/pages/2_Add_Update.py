@@ -1,5 +1,5 @@
 import streamlit as st
-from utils import add_student
+from utils import add_student, get_students
 
 tab1, tab2 = st.tabs(["➕ Add Student", "✏️ Update Student"])
 
