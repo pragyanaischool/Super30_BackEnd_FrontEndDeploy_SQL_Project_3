@@ -4,6 +4,7 @@ from utils import get_students, get_analytics
 
 st.title("Student Analytics Dashboard")
 
+st.subheader(" All Students ")
 res = get_students()
 
 if res.status_code == 200:
