@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from utils import get_students, get_analytics
 
-st.title("Student Analytics Dashboard")
+st.title("PragyanAI Student Analytics Dashboard")
 
 st.subheader(" All Students ")
 res = get_students()
@@ -22,7 +22,7 @@ if res.status_code == 200:
 
     data = res.json()
 
-    st.subheader("📌 Key Metrics")
+    st.subheader(" Key Metrics")
 
     col1, col2 = st.columns(2)
 
@@ -32,11 +32,11 @@ if res.status_code == 200:
     with col2:
         st.metric("Placement Rate", round(data["placement_rate"], 2))
 
-    st.subheader("🏆 Top Students")
+    st.subheader(" Top Students")
     top_df = pd.DataFrame(data["top_students"])
     st.dataframe(top_df)
 
-    st.subheader("⚠️ At Risk Students")
+    st.subheader(" At Risk Students")
     risk_df = pd.DataFrame(data["at_risk_students"])
     st.dataframe(risk_df)
 
