@@ -15,6 +15,7 @@ if res.status_code == 200:
         st.write("No Student")
 
 st.subheader(" Students Analytics ")
+
 res = get_analytics()
 
 if res.status_code == 200:
