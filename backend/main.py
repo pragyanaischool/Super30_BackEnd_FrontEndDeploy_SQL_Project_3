@@ -156,7 +156,15 @@ def analytics(db: Session = Depends(get_db)):
     if not students:
         return {"message": "No data available"}
 
-    df = pd.DataFrame([s.__dict__ for s in students])
+    df = pd.DataFrame([
+        {
+            "name": s.name,
+            "be_cgpa": s.be_cgpa,
+            "placed": s.placed,
+            "projects": s.projects
+        }
+        for s in students
+        ])
 
     return {
     "avg_cgpa": float(df["be_cgpa"].mean()),
