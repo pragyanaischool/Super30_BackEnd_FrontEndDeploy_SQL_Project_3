@@ -1,3 +1,4 @@
+import streamlit as st
 import requests
 from config import API_URL
 #Common REST API - POST / GET / PUT / PATCH / DELETE
