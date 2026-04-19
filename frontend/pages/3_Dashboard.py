@@ -1,10 +1,19 @@
 import streamlit as st
 import pandas as pd
-from utils import get_students
+from utils import get_students, get_analytics
 
 st.title("Student Analytics Dashboard")
 
 res = get_students()
+
+if res.status_code == 200:
+    df = pd.DataFrame(res.json())
+    if not df.empty:
+        st.dataframe(df)
+    else:
+        st.write("No Student")
+
+res = get_analytics()
 
 if res.status_code == 200:
 
