@@ -19,28 +19,29 @@ st.subheader(" Students Analytics ")
 res = get_analytics()
 
 if res.status_code == 200:
-
+    data = res.json()
     df = pd.DataFrame(res.json())
-
     if not df.empty:
-
+       
         st.subheader(" Key Metrics")
-
         col1, col2 = st.columns(2)
 
         with col1:
-            st.metric("Avg CGPA", round(df["be_cgpa"].mean(), 2))
-
+            #st.metric("Avg CGPA", round(df["be_cgpa"].mean(), 2))
+            st.metric("Avg CGPA", round(data["avg_cgpa"], 2))
         with col2:
-            st.metric("Placement Rate", round(df["placed"].mean() * 100, 2))
+            #st.metric("Placement Rate", round(df["placed"].mean() * 100, 2))
+            st.metric("Placement Rate", round(data["placement_rate"], 2))
 
+        st.subheader(" Top Students")
+        st.dataframe(pd.DataFrame(data["top_students"]))
+
+        st.subheader("⚠️ At Risk Students (CGPA < 6) ")
+        st.dataframe(pd.DataFrame(data["at_risk_students"]))
+       
         st.subheader(" CGPA Chart")
         
-        st.bar_chart(df.set_index("name")["be_cgpa"])
-
-        st.subheader("⚠️ At Risk Students (CGPA < 6)")
-        
-        st.dataframe(df[df["be_cgpa"] < 6])
+        st.bar_chart(df.set_index("name")["be_cgpa"])       
 
     else:
         st.warning("No data available")
