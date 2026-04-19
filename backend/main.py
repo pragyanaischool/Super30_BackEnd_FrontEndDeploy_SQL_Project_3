@@ -154,26 +154,34 @@ def analytics(db: Session = Depends(get_db)):
     students = db.query(models.Student).all()
 
     if not students:
-        return {"message": "No data available"}
+        return {
+            "avg_cgpa": 0,
+            "placement_rate": 0,
+            "top_students": [],
+            "at_risk_students": [],
+            "avg_projects": 0
+        }
 
     df = pd.DataFrame([
         {
             "name": s.name,
-            "be_cgpa": s.be_cgpa,
-            "placed": s.placed,
-            "projects": s.projects
+            "be_cgpa": s.be_cgpa or 0,
+            "placed": 1 if s.placed else 0,
+            "projects": s.projects or 0
         }
         for s in students
-        ])
+    ])
 
     return {
-    "avg_cgpa": float(df["be_cgpa"].mean()),
-    "placement_rate": float(df["placed"].mean() * 100),
-    "top_students": df.sort_values("be_cgpa", ascending=False).head(5).to_dict(orient="records"),
-    "at_risk_students": df[df["be_cgpa"] < 6].to_dict(orient="records"),
-    "avg_projects": float(df["projects"].mean())
+        "avg_cgpa": float(df["be_cgpa"].mean()),
+        "placement_rate": float(df["placed"].mean() * 100),
+        "top_students": df.sort_values("be_cgpa", ascending=False)
+                          .head(5)
+                          .to_dict(orient="records"),
+        "at_risk_students": df[df["be_cgpa"] < 6]
+                          .to_dict(orient="records"),
+        "avg_projects": float(df["projects"].mean())
     }
-
 # -----------------------------
 # AI INSIGHTS
 # -----------------------------
