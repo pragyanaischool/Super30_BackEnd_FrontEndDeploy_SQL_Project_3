@@ -27,7 +27,7 @@ class StudentCreate(StudentBase):
 
 
 class StudentUpdate(StudentBase):
-    class StudentUpdate(BaseModel):
+    
     name: Optional[str] = Field(None, min_length=2, max_length=100)
 
     tenth: Optional[float] = Field(None, ge=0, le=100)
