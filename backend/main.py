@@ -159,11 +159,11 @@ def analytics(db: Session = Depends(get_db)):
     df = pd.DataFrame([s.__dict__ for s in students])
 
     return {
-        "avg_cgpa": float(df["be_cgpa"].mean()),
-        "placement_rate": float(df["placed"].mean() * 100),
-        "top_students": df.sort_values("be_cgpa", ascending=False).head(5).to_dict(),
-        "at_risk_students": df[df["be_cgpa"] < 6].to_dict(),
-        "avg_projects": float(df["projects"].mean())
+    "avg_cgpa": float(df["be_cgpa"].mean()),
+    "placement_rate": float(df["placed"].mean() * 100),
+    "top_students": df.sort_values("be_cgpa", ascending=False).head(5).to_dict(orient="records"),
+    "at_risk_students": df[df["be_cgpa"] < 6].to_dict(orient="records"),
+    "avg_projects": float(df["projects"].mean())
     }
 
 # -----------------------------
