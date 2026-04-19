@@ -27,7 +27,25 @@ class StudentCreate(StudentBase):
 
 
 class StudentUpdate(StudentBase):
-    pass
+    class StudentUpdate(BaseModel):
+    name: Optional[str] = Field(None, min_length=2, max_length=100)
+
+    tenth: Optional[float] = Field(None, ge=0, le=100)
+    twelfth: Optional[float] = Field(None, ge=0, le=100)
+    be_cgpa: Optional[float] = Field(None, ge=0, le=10)
+
+    skills: Optional[str] = Field(None, min_length=2)
+    domain: Optional[str] = Field(None, min_length=2)
+
+    projects: Optional[int] = Field(None, ge=0)
+    hackathons: Optional[int] = Field(None, ge=0)
+    papers: Optional[int] = Field(None, ge=0)
+
+    placed: Optional[bool] = None
+
+    company: Optional[str] = Field(None, max_length=100)
+    salary: Optional[float] = Field(None, ge=0)
+    company_type: Optional[str] = Field(None, max_length=50)
 
 
 class StudentResponse(StudentBase):
