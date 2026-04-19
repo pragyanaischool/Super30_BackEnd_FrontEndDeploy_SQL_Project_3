@@ -27,8 +27,7 @@ company_type = st.selectbox(
 )
 
 if st.button("Add Student"):
-   
-  data = {
+    data = {
         "name": name,
         "tenth": tenth,
         "twelfth": twelfth,
