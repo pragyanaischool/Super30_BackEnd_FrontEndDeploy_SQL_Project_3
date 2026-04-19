@@ -35,6 +35,7 @@ def update_student(student_id, data):
 # Analytics
 # -----------------------------
 def get_analytics():
+    st.info(" Before Calling BackEnd")
     return requests.get(f"{API_URL}/analytics")
 
 # -----------------------------
